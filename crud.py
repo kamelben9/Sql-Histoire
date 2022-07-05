@@ -9,6 +9,7 @@ def ajout_utilisateur(user_name,password):
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO User  Values (?,?,?);",(None,str(user_name),str(password)))
     connexion.commit()
+    connexion.close()
 #ajout_utilisateur()  
 
 def insert_challenge_table(UserId, ParagraphId, text, vote):
@@ -35,6 +36,7 @@ def ajout_commentaire(user_id,chapter_id,date,text):
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO Comment  Values (?,?,?,?,?);",(None,user_id,chapter_id,date,text))
     connexion.commit()
+    connexion.close()
 #ajout_commentaire(1,1,1,"tester")
 
 
@@ -75,10 +77,17 @@ def lire_données_commentaire_via_identifiant(user_id):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("Select CommentID,UserID,ChapterID,date,text from Comment WHERE UserID = ? ;",(str(user_id)))
-    connexion.commit()
-    connexion.close()
+    return curseur.fetchall()
 
-#lire_données_commentaire_via_identifiant(1)
+
+def lire_données_chapitre(chapter_id):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("Select Summary from Chapter WHERE ChapterID = ? ;",(str(chapter_id)))
+    return curseur.fetchall()
+
+
+#print(lire_données_chapitre(2))
 def read_user(username,password):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -95,8 +104,8 @@ def read_caracter(CaracterID):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)))
-    connexion.commit()
-    connexion.close()
+    return curseur.fetchall()
+
 
 #read_caracter()
 
@@ -151,12 +160,14 @@ def supprime_utilisateur(id):
     curseur = connexion.cursor()
     curseur.execute("DELETE FROM User WHERE userID = ? ;",(id,))
     connexion.commit()
+    connexion.close()
 
 def supprime_commentaire(id):
     connexion = sqlite3.connect('bdd.db')
     curseur = connexion.cursor()
     curseur.execute("DELETE FROM Comment WHERE CommentID = ? ;",(id,))
     connexion.commit()
+    connexion.close()
 
 #supprime_commentaire(2)
 
@@ -165,12 +176,13 @@ def supprime_chapitre_sommaire(chapter_id):
     curseur = connexion.cursor()
     curseur.execute("DELETE FROM Chapter WHERE ChapterId = ? ;",(chapter_id,))
     connexion.commit()
+    connexion.close()
 
 
 #supprime_chapitre_sommaire(1)
 
 
-#maj du dossier 05/07 16h40
+
 
 
 
