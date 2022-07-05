@@ -109,21 +109,9 @@ def maj_chapitre_sommaire(chapter_id,sommaire):
     curseur.execute("UPDATE Chapter SET Summary = ? WHERE ChapterID = ? ;",(chapter_id,sommaire))
     connexion.commit()
     connexion.close()   
-def update_carater_firstname(CaracterID,firstname):
-    connexion = sqlite3.connect("bdd.db")
-    curseur = connexion.cursor()
-    curseur.execute("UPDATE Caracter SET FistName = ? WHERE FistName = ? ;",(CaracterID, firstname))
-    connexion.commit()
-    connexion.close()
 
-def update_carater_lastname(CaracterID,lastname):
-    connexion = sqlite3.connect("bdd.db")
-    curseur = connexion.cursor()
-    curseur.execute("UPDATE Caracter SET LastName = ? WHERE LastName = ? ;",(CaracterID, lastname))
-    connexion.commit()
-    connexion.close()
 
-def update_carater_lastname(CaracterID,resume):
+def update_caracter_resume(CaracterID,resume):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("UPDATE Caracter SET Resume = ? WHERE Resume = ? ;",(CaracterID, resume))
