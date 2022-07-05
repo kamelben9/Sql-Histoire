@@ -45,7 +45,6 @@ def insert_chapter_table(summary):
     connexion.commit()
     connexion.close()
 
-insert_chapter_table()
 insert_chapter_table("text")
 insert_chapter_table("summary")
 
