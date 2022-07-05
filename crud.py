@@ -72,6 +72,22 @@ def insert_IsInChapter_table(ChapterId,CaracterId):
 
 # Lecture des fonctions (read)
 
+def read_user(username,password):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT UserID, Username, Password FROM User WHERE Username = ? and Password = ?",(username,password));
+    return curseur.fetchall()
+
+def read_paragraph(ChapterID, UserID,description):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""SELECT ParagraphID, ChapterID, UserID, date, text 
+                        FROM Paragraph 
+                        JOIN User ON ParagraphID = UserID
+                        JOIN Chapter ON ParagraphID = ChapterID
+                        WHERE date = ? and text = ?""",(None, ChapterID, UserID, str(datetime.now()), str(description)));
+    return curseur.fetchall()
+
 def read_caracter(CaracterID):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
