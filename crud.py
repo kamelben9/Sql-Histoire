@@ -12,6 +12,8 @@ def insert_chapter_table(summary):
 insert_chapter_table("Test")
 
 #partie utilisateur crud
+
+insert_chapter_table("text")
 insert_chapter_table("summary")
 
 def ajout_utilisateur(user_name,password):
@@ -19,8 +21,11 @@ def ajout_utilisateur(user_name,password):
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO User  Values (?,?,?);",(None,str(user_name),str(password)))
     connexion.commit()
+ajout_utilisateur("test23", "test11")    
 
-<<<<<<< HEAD
+
+
+
 def supprime_utilisateur(id):
     connexion = sqlite3.connect('bdd.db')
     curseur = connexion.cursor()
@@ -41,8 +46,7 @@ def maj_password_utilisateur(id,nom):
     connexion.commit()
     connexion.close()
 
-=======
->>>>>>> 564a461729a82be7aa0de3a6a91d3434536ded0a
+
 
 def creer_caracter(prenom, nom, resume):
     connexion = sqlite3.connect("bdd.db")
@@ -51,7 +55,6 @@ def creer_caracter(prenom, nom, resume):
     connexion.commit()
     connexion.close()
 
-<<<<<<< HEAD
 #Creer méthode crud pour commentaire
 def ajout_commentaire(user_id,chapter_id,date,text):
     connexion = sqlite3.connect('bdd.db')
@@ -74,7 +77,19 @@ def maj_commentaire(id,text_commentaire):
 supprime_commentaire(2)
 maj_commentaire(3,"test_modifier")
 creer_caracter("test","test","test")
-=======
+
+creer_caracter("test2", "test3", "test4")
+
+
+def creer_paragraph(ChapterID, UserID, date, discription):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("INSERT INTO Caracter VALUES (?, ?, ?, ?, ?);", (None, int(ChapterID), UserID, str(date), str(discription)))
+    connexion.commit()
+    connexion.close()
+
+creer_paragraph("2021", "text text text")
+
 creer_caracter("test","test","test")
 
 def insert_IsInChapter_table(ChapterId,CaracterId):
@@ -96,4 +111,4 @@ def insert_challenge_table(UserId, ParagraphId, str, int):
     connexion.close()
 
 insert_challenge_table(1,1,"toto",8)
->>>>>>> 564a461729a82be7aa0de3a6a91d3434536ded0a
+
