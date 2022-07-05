@@ -18,7 +18,7 @@ def insert_challenge_table(UserId, ParagraphId, text, vote):
     connexion.commit()
     connexion.close()
 
-insert_challenge_table(1,1,"toto",8)
+#insert_challenge_table()
 
 def creer_paragraph(ChapterID, UserID, description):
     connexion = sqlite3.connect("bdd.db")
@@ -27,7 +27,7 @@ def creer_paragraph(ChapterID, UserID, description):
     connexion.commit()
     connexion.close()
 
-creer_paragraph(1,1,"toto")
+#creer_paragraph(1,1,"toto")
 
 
 def ajout_commentaire(user_id,chapter_id,date,text):
@@ -35,7 +35,7 @@ def ajout_commentaire(user_id,chapter_id,date,text):
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO Comment  Values (?,?,?,?,?);",(None,user_id,chapter_id,date,text))
     connexion.commit()
-ajout_commentaire(1,1,1,"tester")
+#ajout_commentaire(1,1,1,"tester")
 
 
 def insert_chapter_table(summary):
@@ -45,8 +45,8 @@ def insert_chapter_table(summary):
     connexion.commit()
     connexion.close()
 
-insert_chapter_table("text")
-insert_chapter_table("summary")
+#insert_chapter_table("text")
+#insert_chapter_table("summary")
 
 
 def creer_caracter(prenom, nom, resume):
@@ -56,8 +56,7 @@ def creer_caracter(prenom, nom, resume):
     connexion.commit()
     connexion.close()
 
-creer_caracter()
-creer_caracter("test2", "test3", "test4")
+#creer_caracter("test2", "test3", "test4")
 
 
 def insert_IsInChapter_table(ChapterId,CaracterId):
@@ -67,28 +66,39 @@ def insert_IsInChapter_table(ChapterId,CaracterId):
     connexion.commit()
     connexion.close()
 
-insert_IsInChapter_table(1,1)
+#insert_IsInChapter_table(1,1)
 
 
 
 # Lecture des fonctions (read)
+def lire_données_commentaire_via_identifiant(user_id):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("Select CommentID,UserID,ChapterID,date,text from Comment WHERE UserID = ? ;",(str(user_id)))
+    connexion.commit()
+    connexion.close()
 
+#lire_données_commentaire_via_identifiant(1)
 def read_user(username,password):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("SELECT UserID, Username, Password FROM User WHERE Username = ? and Password = ?",(username,password));
+    curseur.execute("SELECT Username, Password FROM User WHERE Username = ? and Password = ?",(username,password));
     return curseur.fetchall()
 
-def read_paragraph(ChapterID, UserID,description):
+def read_paragraph(description):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("""SELECT ParagraphID, ChapterID, UserID, date, text 
-                        FROM Paragraph 
-                        JOIN User ON ParagraphID = UserID
-                        JOIN Chapter ON ParagraphID = ChapterID
-                        WHERE date = ? and text = ?""",(None, ChapterID, UserID, str(datetime.now()), str(description)));
+    curseur.execute("""SELECT date, text  WHERE date = ? and text = ?""",(str(datetime.now()), str(description)));
     return curseur.fetchall()
 
+def read_caracter(CaracterID):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)))
+    connexion.commit()
+    connexion.close()
+
+#read_caracter()
 
 
 
@@ -110,16 +120,29 @@ def maj_password_utilisateur(id,password):
     connexion.close()
 
 
-def maj_commentaire(id,text_commentaire):
+def maj_commentaire(comment_id,text_commentaire):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("UPDATE Comment SET text = ? WHERE CommentID = ? ;",(text_commentaire,id))
+    curseur.execute("UPDATE Comment SET text = ? WHERE CommentID = ? ;",(text_commentaire,comment_id))
     connexion.commit()
     connexion.close()
 
-maj_commentaire(3,"test_modifier")
+#maj_commentaire(3,"test_modifier")
+
+def maj_chapitre_sommaire(chapter_id,sommaire):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Chapter SET Summary = ? WHERE ChapterID = ? ;",(chapter_id,sommaire))
+    connexion.commit()
+    connexion.close()   
 
 
+def update_caracter_resume(CaracterID,resume):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Caracter SET Resume = ? WHERE Resume = ? ;",(CaracterID, resume))
+    connexion.commit()
+    connexion.close()
 
 # Delete des fonctions
 
@@ -135,11 +158,19 @@ def supprime_commentaire(id):
     curseur.execute("DELETE FROM Comment WHERE CommentID = ? ;",(id,))
     connexion.commit()
 
-supprime_commentaire(2)
+#supprime_commentaire(2)
+
+def supprime_chapitre_sommaire(chapter_id):
+    connexion = sqlite3.connect('bdd.db')
+    curseur = connexion.cursor()
+    curseur.execute("DELETE FROM Chapter WHERE ChapterId = ? ;",(chapter_id,))
+    connexion.commit()
 
 
+#supprime_chapitre_sommaire(1)
 
 
+#maj du dossier 05/07 16h40
 
 
 
