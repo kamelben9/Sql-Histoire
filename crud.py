@@ -93,16 +93,21 @@ def maj_password_utilisateur(id,password):
     connexion.close()
 
 
-def maj_commentaire(id,text_commentaire):
+def maj_commentaire(comment_id,text_commentaire):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("UPDATE Comment SET text = ? WHERE CommentID = ? ;",(text_commentaire,id))
+    curseur.execute("UPDATE Comment SET text = ? WHERE CommentID = ? ;",(text_commentaire,comment_id))
     connexion.commit()
     connexion.close()
 
 maj_commentaire(3,"test_modifier")
 
-
+def maj_chapitre_sommaire(chapter_id,sommaire):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Chapter SET Summary = ? WHERE ChapterID = ? ;",(chapter_id,sommaire))
+    connexion.commit()
+    connexion.close()   
 
 # Delete des fonctions
 
