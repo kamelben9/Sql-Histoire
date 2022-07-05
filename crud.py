@@ -1,5 +1,6 @@
 
 import sqlite3
+from datetime import datetime
 
 #Creation des fonctions (create)
 
@@ -8,7 +9,7 @@ def ajout_utilisateur(user_name,password):
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO User  Values (?,?,?);",(None,str(user_name),str(password)))
     connexion.commit()
-ajout_utilisateur()  
+#ajout_utilisateur()  
 
 def insert_challenge_table(UserId, ParagraphId, text, vote):
     connexion = sqlite3.connect("bdd.db")
@@ -19,14 +20,14 @@ def insert_challenge_table(UserId, ParagraphId, text, vote):
 
 insert_challenge_table(1,1,"toto",8)
 
-def creer_paragraph(ChapterID, UserID, date, discription):
+def creer_paragraph(ChapterID, UserID, description):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("INSERT INTO Caracter VALUES (?, ?, ?, ?, ?);", (None, int(ChapterID), UserID, str(date), str(discription)))
+    curseur.execute("INSERT INTO Paragraph VALUES (?, ?, ?, ?, ?);", (None, ChapterID, UserID, str(datetime.now()), str(description)))
     connexion.commit()
     connexion.close()
 
-creer_paragraph()
+creer_paragraph(1,1,"toto")
 
 
 def ajout_commentaire(user_id,chapter_id,date,text):
@@ -108,6 +109,26 @@ def maj_chapitre_sommaire(chapter_id,sommaire):
     curseur.execute("UPDATE Chapter SET Summary = ? WHERE ChapterID = ? ;",(chapter_id,sommaire))
     connexion.commit()
     connexion.close()   
+def update_carater_firstname(CaracterID,firstname):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Caracter SET FistName = ? WHERE FistName = ? ;",(CaracterID, firstname))
+    connexion.commit()
+    connexion.close()
+
+def update_carater_lastname(CaracterID,lastname):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Caracter SET LastName = ? WHERE LastName = ? ;",(CaracterID, lastname))
+    connexion.commit()
+    connexion.close()
+
+def update_carater_lastname(CaracterID,resume):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("UPDATE Caracter SET Resume = ? WHERE Resume = ? ;",(CaracterID, resume))
+    connexion.commit()
+    connexion.close()
 
 # Delete des fonctions
 
