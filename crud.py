@@ -71,9 +71,14 @@ insert_IsInChapter_table(1,1)
 
 
 # Lecture des fonctions (read)
+def lire_données_commentaire_via_identifiant(user_id):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("Select CommentID,UserID,ChapterID,date,text from Comment WHERE UserID = ? ;",(str(user_id)))
+    connexion.commit()
+    connexion.close()
 
-
-
+#lire_données_commentaire_via_identifiant(1)
 
 # Update des fonctions
 
