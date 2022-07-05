@@ -45,7 +45,6 @@ def insert_chapter_table(summary):
     connexion.commit()
     connexion.close()
 
-insert_chapter_table()
 insert_chapter_table("text")
 insert_chapter_table("summary")
 
@@ -57,7 +56,6 @@ def creer_caracter(prenom, nom, resume):
     connexion.commit()
     connexion.close()
 
-creer_caracter()
 creer_caracter("test2", "test3", "test4")
 
 
@@ -134,9 +132,14 @@ def supprime_commentaire(id):
 
 supprime_commentaire(2)
 
+def supprime_chapitre_sommaire(chapter_id):
+    connexion = sqlite3.connect('bdd.db')
+    curseur = connexion.cursor()
+    curseur.execute("DELETE FROM Chapter WHERE ChapterId = ? ;",(chapter_id,))
+    connexion.commit()
 
 
-
+supprime_chapitre_sommaire(1)
 
 
 
