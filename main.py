@@ -34,7 +34,7 @@ def afficher_histoire():
     print("Posté par : "+liste_info[0][0]+" | "+liste_info[0][3])
     print(liste_info[0][4])   
 
-afficher_histoire()
+#afficher_histoire()
 
 #Cette fonction permet de lire l'histoire
 def lire_histoire(userID):
@@ -44,4 +44,8 @@ def lire_histoire(userID):
     print("------------------------------")
     for i in range(len(liste_histoire)):
         print(liste_histoire[i][2])
-lire_histoire(1)
+#lire_histoire(1)
+
+#Cette fonction permet d'écrire la suite
+
+
