@@ -76,34 +76,35 @@ def insert_IsInChapter_table(ChapterId,CaracterId):
 def lire_données_commentaire_via_identifiant(user_id):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("Select CommentID,UserID,ChapterID,date,text from Comment WHERE UserID = ? ;",(str(user_id)))
+    curseur.execute("Select CommentID,UserID,ChapterID,date,text from Comment WHERE UserID = ? ;",(str(user_id)),)
     return curseur.fetchall()
 
 
 def lire_données_chapitre(chapter_id):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("Select Summary from Chapter WHERE ChapterID = ? ;",(str(chapter_id)))
+    curseur.execute("Select Summary from Chapter WHERE ChapterID = ? ;",(str(chapter_id)),)
     return curseur.fetchall()
 
 
 #print(lire_données_chapitre(2))
-def read_user(username,password):
+def read_user(username):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("SELECT Username, Password FROM User WHERE Username = ? and Password = ?",(username,password));
+    curseur.execute("SELECT * FROM User WHERE Username = ? ;",(username,))
     return curseur.fetchall()
+
 
 def read_paragraph(description):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("""SELECT date, text  WHERE date = ? and text = ?""",(str(datetime.now()), str(description)));
+    curseur.execute("""SELECT date, text  WHERE date = ? and text = ?""",(str(datetime.now(),), str(description)));
     return curseur.fetchall()
 
 def read_caracter(CaracterID):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)))
+    curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)),)
     return curseur.fetchall()
 
 
