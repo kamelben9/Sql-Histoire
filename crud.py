@@ -13,6 +13,9 @@ def ajout_utilisateur(user_name,password):
 #ajout_utilisateur()  
 
 def insert_challenge_table(UserId, ParagraphId, text, vote):
+
+    vote = 0
+    
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("INSERT INTO Challenge VALUES( ? , ? , ?, ?) " , (UserId , ParagraphId, str(text), int(vote)))
