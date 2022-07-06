@@ -3,6 +3,7 @@ import sqlite3
 import hashlib
 import fonction
 import time
+#Motde passe identification, et affichage debut
 def identification():
     identifiant= input("Entrez votre login : ")
     liste = crud.read_user(identifiant)

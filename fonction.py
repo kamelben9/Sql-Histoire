@@ -1,3 +1,4 @@
+
 import crud
 import sqlite3
 import hashlib
@@ -16,11 +17,10 @@ def creation_de_compte():
 
     h = hashlib.new('sha256')
     h.update(input_mot_de_passe.encode())
-
     utilisateur["password"] = h.hexdigest()
 
     print(utilisateur["password"])
+
     crud.ajout_utilisateur(utilisateur["username"],utilisateur["password"])
 
-
-
+creation_de_compte()
