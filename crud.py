@@ -204,7 +204,15 @@ def supprime_paragraphe(paragraphe_ID):
     curseur.execute("DELETE FROM Paragraph WHERE ParagraphID = ? ;",(paragraphe_ID,))
     connexion.commit()
     connexion.close()
-#supprime_chapitre_sommaire(1)
+
+def supprime_caractere(caracter_ID):
+    connexion = sqlite3.connect('bdd.db')
+    curseur = connexion.cursor()
+    curseur.execute("DELETE FROM Caracter WHERE CaracterID = ? ;",(caracter_ID,))
+    connexion.commit()
+    connexion.close()
+
+
 
 
 
