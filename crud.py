@@ -118,6 +118,14 @@ def read_caracter(CaracterID):
     curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)),)
     return curseur.fetchall()
 
+def read_chapter(ChapterID):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""SELECT Chapter.ChapterID,Summary,Paragraph.Text FROM Chapter 
+    JOIN Paragraph ON Chapter.ChapterID=Paragraph.ChapterID 
+    WHERE Chapter.ChapterID = ? ;""" ,(str(ChapterID),))
+    return curseur.fetchall()
+
 
 #read_caracter()
 
@@ -190,7 +198,12 @@ def supprime_chapitre_sommaire(chapter_id):
     connexion.commit()
     connexion.close()
 
-
+def supprime_paragraphe(paragraphe_ID):
+    connexion = sqlite3.connect('bdd.db')
+    curseur = connexion.cursor()
+    curseur.execute("DELETE FROM Paragraph WHERE ParagraphID = ? ;",(paragraphe_ID,))
+    connexion.commit()
+    connexion.close()
 #supprime_chapitre_sommaire(1)
 
 

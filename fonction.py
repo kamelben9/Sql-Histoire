@@ -23,4 +23,3 @@ def creation_de_compte():
 
     crud.ajout_utilisateur(utilisateur["username"],utilisateur["password"])
 
-creation_de_compte()

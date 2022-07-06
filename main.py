@@ -1,8 +1,9 @@
 import crud
 import sqlite3
 import hashlib
-import fonction
 import time
+
+
 #Motde passe identification, et affichage debut
 def identification():
     identifiant= input("Entrez votre login : ")
@@ -22,6 +23,8 @@ def identification():
         print("Votre identifiant n'existe pas.Essayez encore une fois.")
 
 crud.creer_paragraph(15,5,"Test_Marina")
+
+#Cette fonction permet d'afficher le début de l'histroire
 def afficher_histoire():
     liste_info = crud.lire_dernier_paragraph()
 
@@ -31,7 +34,14 @@ def afficher_histoire():
     print("Posté par : "+liste_info[0][0]+" | "+liste_info[0][3])
     print(liste_info[0][4])   
 
-
-
-
 afficher_histoire()
+
+#Cette fonction permet de lire l'histoire
+def lire_histoire(userID):
+    liste_histoire =crud.read_chapter(userID)
+    print("Ceci est le chapitre "+str(liste_histoire[0][0])+" : (Résumé)")
+    print(liste_histoire[0][1])
+    print("------------------------------")
+    for i in range(len(liste_histoire)):
+        print(liste_histoire[i][2])
+lire_histoire(1)
