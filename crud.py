@@ -95,10 +95,21 @@ def read_user(username):
     return curseur.fetchall()
 
 
-def read_paragraph(description):
+def read_paragraph(paragraphe_id):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("""SELECT date, text  WHERE date = ? and text = ?""",(str(datetime.now(),), str(description)));
+    curseur.execute("""SELECT Date, Text,Username 
+    FROM Paragraph 
+    JOIN User On Paragraphe.UserID = User.UserID 
+    WHERE ParagraphID = ? ;""",(str(datetime.now(),), str(paragraphe_id)))
+    return curseur.fetchall()
+
+def lire_dernier_paragraph():
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""SELECT Username,ChapterID,Paragraph.UserID,date,text
+    FROM Paragraph
+    Join User ON   Paragraph.UserID=User.UserID ORDER BY date DESC ;""")
     return curseur.fetchall()
 
 def read_caracter(CaracterID):

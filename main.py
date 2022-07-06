@@ -1,7 +1,9 @@
 import crud
 import sqlite3
 import hashlib
-
+import fonction
+import time
+#Motde passe identification, et affichage debut
 def identification():
     identifiant= input("Entrez votre login : ")
     liste = crud.read_user(identifiant)
@@ -19,5 +21,17 @@ def identification():
     else:
         print("Votre identifiant n'existe pas.Essayez encore une fois.")
 
+crud.creer_paragraph(15,5,"Test_Marina")
+def afficher_histoire():
+    liste_info = crud.lire_dernier_paragraph()
 
-identification()
+
+    print("Dernier Message : ")
+
+    print("Posté par : "+liste_info[0][0]+" | "+liste_info[0][3])
+    print(liste_info[0][4])   
+
+
+
+
+afficher_histoire()
