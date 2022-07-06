@@ -1,25 +1,14 @@
-<<<<<<< HEAD
 import hashlib
 
-
-
-#ceci est le fichier pour les fonctions
-
-def verif_user(username, password):
-
-
-    utilisateur = {"username" : None, "password" : None}
-
-    
-    h = hashlib.new('sha256')
-    h.update(password.encode())
-=======
+from sympy import re
 import crud
 import sqlite3
-import hashlib
+from datetime import datetime
+
+
 #ceci est le fichier pour les fonctions
 # curseur.lastrowid methode qui permet de recuper le dernier element d'une requete SQL
-
+"""
 
 def creation_de_compte():
     utilisateur = {"username" : None , "password" : None}
@@ -32,19 +21,24 @@ def creation_de_compte():
 
     h = hashlib.new('sha256')
     h.update(input_mot_de_passe.encode())
->>>>>>> 5b8d4e094ab6d5be9a91ba1b7cd51b06bff1bf37
 
     utilisateur["password"] = h.hexdigest()
 
     print(utilisateur["password"])
-<<<<<<< HEAD
     
 
     if utilisateur["password"] :
         pass
-=======
     crud.ajout_utilisateur(utilisateur["username"],utilisateur["password"])
-    
+"""
+#creation_de_compte()
 
-creation_de_compte()
->>>>>>> 5b8d4e094ab6d5be9a91ba1b7cd51b06bff1bf37
+def afficher_infos(username, datetime):
+
+
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT * FROM User WHERE Username = ? ",(username,(str(datetime.now()))))
+    return curseur.fetchall()
+
+    listinfo = crud.read_paragraph()
