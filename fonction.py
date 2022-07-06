@@ -1,9 +1,9 @@
-
 import crud
 import sqlite3
 import hashlib
 #ceci est le fichier pour les fonctions
 # curseur.lastrowid methode qui permet de recuper le dernier element d'une requete SQL
+
 
 
 def creation_de_compte():
@@ -18,8 +18,13 @@ def creation_de_compte():
     h = hashlib.new('sha256')
     h.update(input_mot_de_passe.encode())
     utilisateur["password"] = h.hexdigest()
-
+    
     print(utilisateur["password"])
-
+    
     crud.ajout_utilisateur(utilisateur["username"],utilisateur["password"])
 
+<<<<<<< HEAD
+=======
+creation_de_compte()
+
+>>>>>>> bfd499746558cb595cd1307f6acf72af96b3a378
