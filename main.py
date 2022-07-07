@@ -62,7 +62,8 @@ while(personne_connecte):
 
     commande_utilisateur=input("Entrez votre commande : \n (1:Lire Histoire |2: Contester le dernier message | 3:Ecrire la suite | 4 : Se Déconnecter :")
     if(commande_utilisateur=="1"  ):
-
+        lit_histoire=true
+        nouvelle_histoire=true
         while(nouvelle_histoire):
             liste_retourne=lire_histoire(chapitre_choisi)       
             print(liste_retourne)            
@@ -117,3 +118,7 @@ while(personne_connecte):
                     chapitre_choisi=int(input("Entrez le numéro du chapitre que vous voulez voir : "))
                     lit_histoire =false
                     nouvelle_histoire=true
+                
+                if sous_commande_utilisateur == "R":
+                    lit_histoire=false
+                    nouvelle_histoire=false
