@@ -138,7 +138,7 @@ while(personne_connecte):
                         print(i)
     if(commande_utilisateur=="3"):
         liste_info=ecrire_la_suite()
-        print("Chapitre"+str(liste_info[0][0])+": (Résumé)")
+        print("Chapitre "+str(liste_info[0][0])+": (Résumé)")
         print(liste_info[0][1])
         print("----------------")
         print("Liste des personnages : ")
@@ -150,4 +150,25 @@ while(personne_connecte):
         print("Posté par : "+liste_info_presentation[0][0]+" | "+liste_info_presentation[0][3])
 
         print("Entrez votre commande")
-        commande_caractere=input("S:Ecrire la suite | R : Retourner au menu précédent | A: ajouter un personnage existant  | C : créer un nouveau personnage")
+        commande_caractere=input("S:Ecrire la suite | R : Retourner au menu précédent | A: ajouter un personnage existant  | C : créer un nouveau personnage : ")
+        if(commande_caractere=="S"):
+            nouveau_paragraphe = input("Veuillez rentrer votre nouveau paragraphe :")
+            nouveau_sommaire = input("Veuillez entrer votre sommaire")
+            crud.creer_paragraph(str(liste_info_presentation[0][0]),liste_info_presentation[0][2],nouveau_paragraphe)
+            crud.insert_chapter_table(nouveau_sommaire)
+        
+        if(commande_caractere=="R"):
+            lit_histoire=false
+            nouvelle_histoire=false
+
+        if(commande_caractere=="A"):
+            liste_personnage_existant =crud.afficher_tout_caracter()
+            for i in range(len(liste_personnage_existant)):
+                print("Voici le nombre du caractere "+str(liste_personnage_existant[i][0])+" pour le caractere "+ str(liste_personnage_existant[i][1])+" "+str(liste_personnage_existant[i][2])+" "+str(liste_personnage_existant[i][3]))
+            id_du_caracter=input("Veuillez choisir le nombre pour votre character")
+            crud.insert_IsInChapter_table(id_du_caracter,liste_info[0][0])
+        if(commande_caractere=="C"):
+            prenom_du_caractere=input("Veuillez créer le prénom de votre personnage.")
+            nom_du_caractere=input("Veuillez créer le nom de votre personnage")
+            description_du_personnage=input("Veuillez décrire votre personnage.")
+            crud.creer_caracter(prenom_du_caractere,nom_du_caractere,description_du_personnage)

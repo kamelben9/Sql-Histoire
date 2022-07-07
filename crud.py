@@ -138,6 +138,13 @@ def read_caracter(CaracterID):
     curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)),)
     return curseur.fetchall()
 
+def afficher_tout_caracter():
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT * FROM Caracter;")
+    return curseur.fetchall()
+
+
 def read_chapter(ChapterID):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
