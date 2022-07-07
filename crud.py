@@ -34,10 +34,10 @@ def creer_paragraph(ChapterID, UserID, description):
 #creer_paragraph(1,1,"toto")
 
 
-def ajout_commentaire(user_id,chapter_id,date,text):
+def ajout_commentaire(user_id,chapter_id,text):
     connexion = sqlite3.connect('bdd.db')
     curseur = connexion.cursor()
-    curseur.execute("INSERT INTO Comment  Values (?,?,?,?,?);",(None,user_id,chapter_id,date,text))
+    curseur.execute("INSERT INTO Comment  Values (?,?,?,?,?);",(None,user_id,chapter_id,str(datetime.now()),text))
     connexion.commit()
     connexion.close()
 #ajout_commentaire(1,1,1,"tester")
@@ -101,6 +101,17 @@ def read_user(username):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("SELECT * FROM User WHERE Username = ? ;",(username,))
+    return curseur.fetchall()
+
+def lire_commentaire(chapterID):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""SELECT Comment.Date,Comment.Text,User.Username,Chapter.ChapterID 
+    FROM Chapter
+    JOIN Comment ON Chapter.ChapterID=Comment.ChapterID
+    JOIN User ON Comment.UserID = User.UserID
+    WHERE Chapter.ChapterID = ? 
+    ORDER BY Date DESC;""",(chapterID,))
     return curseur.fetchall()
 
 

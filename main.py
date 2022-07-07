@@ -52,6 +52,12 @@ def lire_histoire(ChapterID):
 #lire_histoire(1)
 
 #Cette fonction permet d'écrire la suite
+def ecrire_la_suite():
+    liste_caractere=crud.read_chapter_charactere()
+    return liste_caractere    
+
+
+
 
 personne_connecte=identification()
 paragraphe_en_cours=1
@@ -61,7 +67,7 @@ while(personne_connecte):
     afficher_histoire()
 
     commande_utilisateur=input("Entrez votre commande : \n (1:Lire Histoire |2: Contester le dernier message | 3:Ecrire la suite | 4 : Se Déconnecter :")
-    if(commande_utilisateur=="1"  ):
+    if(commande_utilisateur=="1"):
         lit_histoire=true
         nouvelle_histoire=true
         while(nouvelle_histoire):
@@ -122,3 +128,26 @@ while(personne_connecte):
                 if sous_commande_utilisateur == "R":
                     lit_histoire=false
                     nouvelle_histoire=false
+                
+                if sous_commande_utilisateur == "K":
+                    nombre_total_chapitre=str(crud.nombre_de_chapitre())
+                    print("Il y a "+nombre_total_chapitre)
+                    chapitre_commentaire_a_voir=str(input("Entrez le numéro du chapitre que vous voulez voir : "))
+                    liste_commentaire= crud.lire_commentaire(chapitre_commentaire_a_voir)
+                    for i in liste_commentaire:
+                        print(i)
+    if(commande_utilisateur=="3"):
+        liste_info=ecrire_la_suite()
+        print("Chapitre"+str(liste_info[0][0])+": (Résumé)")
+        print(liste_info[0][1])
+        print("----------------")
+        print("Liste des personnages : ")
+        for i in range(len(liste_info)):
+            print(str(liste_info[i][2])+" "+str(liste_info[i][3]))
+        print("----------------")
+        liste_info_presentation = crud.lire_dernier_paragraph()
+        print("Dernier Message : ")
+        print("Posté par : "+liste_info_presentation[0][0]+" | "+liste_info_presentation[0][3])
+
+        print("Entrez votre commande")
+        commande_caractere=input("S:Ecrire la suite | R : Retourner au menu précédent | A: ajouter un personnage existant  | C : créer un nouveau personnage")
