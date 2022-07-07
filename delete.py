@@ -10,7 +10,8 @@ def supprimer_paragraphe():
     for i in range(1,32):
         crud.supprime_paragraphe(i)
 def inserer_paragraph():
-    crud.creer_paragraph(2,1,"C'est le paragraphe n°1")
+    crud.creer_paragraph(1,2,"C'est le paragraphe test4")
+inserer_paragraph()
 
 def effacer_character():
     for i in range(14):
