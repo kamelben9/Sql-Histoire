@@ -10,7 +10,8 @@ def supprimer_paragraphe():
     for i in range(1,32):
         crud.supprime_paragraphe(i)
 def inserer_paragraph():
-    crud.creer_paragraph(1,2,"C'est le paragraphe test4")
+    crud.creer_paragraph(1,5,"C'est le paragraphe n°7")
+    print("c'est")
 inserer_paragraph()
 
 def effacer_character():
@@ -18,7 +19,6 @@ def effacer_character():
         crud.supprime_caractere(i)
 def ajouter_caracter():
     crud.creer_caracter("Marina","Maoka","Personnage n°1")
-ajouter_caracter()
 
 
 def efface_Is_in_chapter():
@@ -30,4 +30,3 @@ def ajoute_Is_in_Chapter():
 def ajoute_Is_in_Chapter():
     liste_info_caractere =crud.read_chapter_charactere()
     print(liste_info_caractere)
-ajoute_Is_in_Chapter()
