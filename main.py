@@ -64,65 +64,48 @@ while(personne_connecte):
         print(liste_retourne)
         i=0
         j=i+3        
-        lit_histoire= True
-
+        lit_histoire= true
         if len(liste_retourne)>j:
             for _ in liste_retourne[i:j]:
                 print(_)
         else:
             for _ in liste_retourne[i:len(liste_retourne)]:
                 print(_)
-        sous_commande_utilisateur=input("Entrez votre commande : \n (S : Aller à la page suivante |P : Aller à la page précédente | C : Choisir un chapitre | R : Retourner au menu précedent : | K : Lire les commentaires : ")        
+        while(lit_histoire):
 
-        if sous_commande_utilisateur=="S":
-            if(i+3<len(liste_retourne)):
-                i+=3
-                if len(liste_retourne)>i+3:                
-                    j=i+3
+            sous_commande_utilisateur=input("Entrez votre commande : \n (S : Aller à la page suivante |P : Aller à la page précédente | C : Choisir un chapitre | R : Retourner au menu précedent : | K : Lire les commentaires : ") 
+            if sous_commande_utilisateur=="S":
+                if(i+3<len(liste_retourne)):
+                    i+=3
+                    if len(liste_retourne)>i+3:   
+                        j=i+3
+                    else:
+                        j= len(liste_retourne)
+                    for _ in liste_retourne[i:j]:
+                        print(_)
                 else:
-                    j=len(liste_retourne)
-                for _ in liste_retourne[i:j]:
-                    print(_)
-
-            while(lit_histoire):
-                sous_commande_utilisateur=input("Entrez votre commande : \n (S : Aller à la page suivante |P : Aller à la page précédente | C : Choisir un chapitre | R : Retourner au menu précedent : | K : Lire les commentaires : ")        
-
-                if sous_commande_utilisateur=="S":
-                    if(i+3<len(liste_retourne)):
-                        i+=3
-                        if len(liste_retourne)>i+3:   
-                            j=i+3
-                        else:
-                            j= len(liste_retourne)>j
-                        for _ in liste_retourne[i:j]:
-                            print(_)
+                    print("Vous êtes à la dernière page.Il n'y a pas de page suivante.") 
+                    j= len(liste_retourne)
+                    for _ in liste_retourne[i:j]:
+                        print(_)
+            if sous_commande_utilisateur=="P":
+                print(i)
+                if(0<=i<3):
+                    print("Vous êtes à la première page.Vous ne pouvez pas aller en arrière")                              
+                    if len(liste_retourne)>i+3:   
+                        j=i+3
                     else:
-                        print("Vous êtes à la dernière page.Il n'y a pas de page suivante.") 
-                        if(i+3<len(liste_retourne)):
-                            i-=3
-                            if len(liste_retourne)>i+3:   
-                                j=i+3
-                            else:
-                                j= len(liste_retourne)>j                        
-                        for _ in liste_retourne[i:j]:
-                            print(_)
-                if sous_commande_utilisateur=="P":
-                    if(i-3>=0):
-                        i-=3
-                        if len(liste_retourne)>i+3:   
-                            j=i+3
-                        else:
-                            j= len(liste_retourne)
-                            
-                        for _ in liste_retourne[i:j]:
-                            print(_)
+                        j= len(liste_retourne)
+                        
+                    for _ in liste_retourne[i:j]:
+                        print(_)
+                else:
+                    i-=3
+                    if len(liste_retourne)>i+3:   
+                        j=i+3
                     else:
-                        print("Vous êtes à la première page.Vous ne pouvez pas aller en arrière")  
-                        if(i-3>=0):
-                            i-=3
-                            if len(liste_retourne)>i+3:   
-                                j=i+3
-                            else:
-                                j= len(liste_retourne)
-                        for _ in liste_retourne[i:j]:
-                            print(_)
+                        j= len(liste_retourne)
+                    for _ in liste_retourne[i:j]:
+                        print(_)
+
+                
