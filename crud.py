@@ -89,6 +89,12 @@ def lire_données_chapitre(chapter_id):
     curseur.execute("Select Summary from Chapter WHERE ChapterID = ? ;",(str(chapter_id)),)
     return curseur.fetchall()
 
+def nombre_de_chapitre():
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("Select ChapterID from Chapter  ORDER BY ChapterID DESC ;")
+    return curseur.fetchone()
+
 
 #print(lire_données_chapitre(2))
 def read_user(username):

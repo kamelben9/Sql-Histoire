@@ -30,3 +30,5 @@ def ajoute_Is_in_Chapter():
 def ajoute_Is_in_Chapter():
     liste_info_caractere =crud.read_chapter_charactere()
     print(liste_info_caractere)
+
+

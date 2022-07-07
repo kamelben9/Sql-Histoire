@@ -55,57 +55,65 @@ def lire_histoire(ChapterID):
 
 personne_connecte=identification()
 paragraphe_en_cours=1
+chapitre_choisi=1
+nouvelle_histoire=true
 while(personne_connecte):
     afficher_histoire()
 
     commande_utilisateur=input("Entrez votre commande : \n (1:Lire Histoire |2: Contester le dernier message | 3:Ecrire la suite | 4 : Se Déconnecter :")
-    if(commande_utilisateur=="1"):
-        liste_retourne=lire_histoire(1)
-        print(liste_retourne)
-        i=0
-        j=i+3        
-        lit_histoire= true
-        if len(liste_retourne)>j:
-            for _ in liste_retourne[i:j]:
-                print(_)
-        else:
-            for _ in liste_retourne[i:len(liste_retourne)]:
-                print(_)
-        while(lit_histoire):
+    if(commande_utilisateur=="1"  ):
 
-            sous_commande_utilisateur=input("Entrez votre commande : \n (S : Aller à la page suivante |P : Aller à la page précédente | C : Choisir un chapitre | R : Retourner au menu précedent : | K : Lire les commentaires : ") 
-            if sous_commande_utilisateur=="S":
-                if(i+3<len(liste_retourne)):
-                    i+=3
-                    if len(liste_retourne)>i+3:   
-                        j=i+3
-                    else:
-                        j= len(liste_retourne)
-                    for _ in liste_retourne[i:j]:
-                        print(_)
-                else:
-                    print("Vous êtes à la dernière page.Il n'y a pas de page suivante.") 
-                    j= len(liste_retourne)
-                    for _ in liste_retourne[i:j]:
-                        print(_)
-            if sous_commande_utilisateur=="P":
-                print(i)
-                if(0<=i<3):
-                    print("Vous êtes à la première page.Vous ne pouvez pas aller en arrière")                              
-                    if len(liste_retourne)>i+3:   
-                        j=i+3
-                    else:
-                        j= len(liste_retourne)
-                        
-                    for _ in liste_retourne[i:j]:
-                        print(_)
-                else:
-                    i-=3
-                    if len(liste_retourne)>i+3:   
-                        j=i+3
-                    else:
-                        j= len(liste_retourne)
-                    for _ in liste_retourne[i:j]:
-                        print(_)
-
+        while(nouvelle_histoire):
+            liste_retourne=lire_histoire(chapitre_choisi)       
+            print(liste_retourne)            
+            i=0
+            j=i+3        
+            lit_histoire= true
+            if len(liste_retourne)>j:
+                for _ in liste_retourne[i:j]:
+                    print(_)
+            else:
+                for _ in liste_retourne[i:len(liste_retourne)]:
+                    print(_)
+            while(lit_histoire):
+                sous_commande_utilisateur=input("Entrez votre commande : \n (S : Aller à la page suivante |P : Aller à la page précédente | C : Choisir un chapitre | R : Retourner au menu précedent : | K : Lire les commentaires : ") 
                 
+                if sous_commande_utilisateur=="S":
+                    if(i+3<len(liste_retourne)):
+                        i+=3
+                        if len(liste_retourne)>i+3:   
+                            j=i+3
+                        else:
+                            j= len(liste_retourne)
+                        for _ in liste_retourne[i:j]:
+                            print(_)
+                    else:
+                        print("Vous êtes à la dernière page.Il n'y a pas de page suivante.") 
+                        j= len(liste_retourne)
+                        for _ in liste_retourne[i:j]:
+                            print(_)
+                if sous_commande_utilisateur=="P":
+                    if(0<=i<3):
+                        print("Vous êtes à la première page.Vous ne pouvez pas aller en arrière")                              
+                        if len(liste_retourne)>i+3:   
+                            j=i+3
+                        else:
+                            j= len(liste_retourne)
+                            
+                        for _ in liste_retourne[i:j]:
+                            print(_)
+                    else:
+                        i-=3
+                        if len(liste_retourne)>i+3:   
+                            j=i+3
+                        else:
+                            j= len(liste_retourne)
+                        for _ in liste_retourne[i:j]:
+                            print(_)
+
+                if sous_commande_utilisateur == "C":
+                    nombre_total_chapitre=str(crud.nombre_de_chapitre())
+                    print("Il y a "+nombre_total_chapitre)
+                    chapitre_choisi=int(input("Entrez le numéro du chapitre que vous voulez voir : "))
+                    lit_histoire =false
+                    nouvelle_histoire=true
