@@ -127,9 +127,11 @@ def read_paragraph(paragraphe_id):
 def lire_dernier_paragraph():
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("""SELECT Username,ChapterID,Paragraph.UserID,date,text
+    curseur.execute("""SELECT Username,Chapter.ChapterID,Paragraph.UserID,date,text,Chapter.Summary
     FROM Paragraph
-    Join User ON   Paragraph.UserID=User.UserID ORDER BY date DESC ;""")
+    Join User ON   Paragraph.UserID=User.UserID
+    Join Chapter ON Paragraph.ChapterID =Chapter.ChapterID
+     ORDER BY date DESC ;""")
     return curseur.fetchall()
 
 def read_caracter(CaracterID):

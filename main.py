@@ -31,7 +31,7 @@ crud.creer_paragraph(15,5,"Test_Marina")
 #Cette fonction permet d'afficher le début de l'histroire
 def afficher_histoire():
     liste_info = crud.lire_dernier_paragraph()
-    print("             Chapitre 1")
+    print("             Chapitre "+str(liste_info[0][1]))
     print("Dernier Message : ")
 
     print("Posté par : "+liste_info[0][0]+" | "+liste_info[0][3])
@@ -172,3 +172,28 @@ while(personne_connecte):
             nom_du_caractere=input("Veuillez créer le nom de votre personnage")
             description_du_personnage=input("Veuillez décrire votre personnage.")
             crud.creer_caracter(prenom_du_caractere,nom_du_caractere,description_du_personnage)
+
+    if(commande_utilisateur=="2"):
+        liste_info_nouvelle =crud.lire_dernier_paragraph()
+        print("Ceci est le chapitre "+str(liste_info_nouvelle[0][0])+" : (Résumé)")
+        print(liste_info_nouvelle[0][5])
+        print("------------------------------")
+        print(liste_info_nouvelle[0][1])
+        print("Dernier Message : ")
+
+        print("Posté par : "+liste_info_nouvelle[0][0]+" | "+liste_info_nouvelle[0][3])
+        print(liste_info_nouvelle[0][4])   
+        commande_conteste = input("""Entrer votre commande \n
+             C : Contester le dernier paragraphe | R : Retourner au menu précédent """)
+
+        if commande_conteste=="C":
+            pass
+
+        if commande_conteste=="R":
+            lit_histoire=false
+            nouvelle_histoire=false
+    
+    if(commande_utilisateur=="4"):
+        quit()
+        #On peut sinon faire
+        #personne_connecte = false
