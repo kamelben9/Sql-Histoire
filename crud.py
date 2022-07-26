@@ -12,7 +12,7 @@ def ajout_utilisateur(user_name,password):
     connexion.close()
 #ajout_utilisateur()  
 
-def insert_challenge_table(UserId, ParagraphId, text, vote):
+def insert_challenge_table(UserId, ParagraphId, text):
 
     vote = 0
     
@@ -89,6 +89,8 @@ def lire_données_chapitre(chapter_id):
     curseur.execute("Select Summary from Chapter WHERE ChapterID = ? ;",(str(chapter_id)),)
     return curseur.fetchall()
 
+
+
 def nombre_de_chapitre():
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -127,9 +129,11 @@ def read_paragraph(paragraphe_id):
 def lire_dernier_paragraph():
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
-    curseur.execute("""SELECT Username,ChapterID,Paragraph.UserID,date,text
+    curseur.execute("""SELECT Username,Chapter.ChapterID,Paragraph.UserID,date,text,Chapter.Summary,Paragraph.ParagraphID
     FROM Paragraph
-    Join User ON   Paragraph.UserID=User.UserID ORDER BY date DESC ;""")
+    Join User ON   Paragraph.UserID=User.UserID
+    Join Chapter ON Paragraph.ChapterID =Chapter.ChapterID
+     ORDER BY date DESC ;""")
     return curseur.fetchall()
 
 def read_caracter(CaracterID):
@@ -137,6 +141,13 @@ def read_caracter(CaracterID):
     curseur = connexion.cursor()
     curseur.execute("SELECT FistName, LastName, Resume FROM Caracter WHERE CaracterID = ? ;", (str(CaracterID)),)
     return curseur.fetchall()
+
+def afficher_tout_caracter():
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT * FROM Caracter;")
+    return curseur.fetchall()
+
 
 def read_chapter(ChapterID):
     connexion = sqlite3.connect("bdd.db")
@@ -158,7 +169,12 @@ def read_chapter_charactere():
      ;""" )
     return curseur.fetchall()
 #read_caracter()
-
+#recuperer nombre utilisateur
+def recuperer_id_user():
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("SELECT UserID FROM User;")
+    return curseur.fetchall()
 
 
 

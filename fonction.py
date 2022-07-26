@@ -47,10 +47,12 @@ def vote(paragraph_id, vote):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""SELECT * FROM Challenge
-                        WHERE ParagraphID = ?""",(paragraph_id))
+                        WHERE ParagraphID = ?""",(str(paragraph_id),))
 
     vote_actuel = curseur.fetchone()[3]
-    curseur.execute("""UPDATE * FROM Challenge
-                        WHERE ParagraphID = ?""",(vote_actuel + vote,paragraph_id))
+    vote_final =str(int(vote)+int(vote_actuel))
+
+    curseur.execute("""UPDATE Challenge SET Vote = ?
+                        WHERE ParagraphID = ?""",(vote_final,str(paragraph_id)))
     connexion.commit()
     connexion.close()
