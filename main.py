@@ -1,17 +1,14 @@
 from re import I
-from numpy import kaiser
-from sympy import OneMatrix, false, jacobi_normalized, true
 import crud
 import sqlite3
 import hashlib
 import time
-
+from fonction import creation_de_compte
 
 #Motde passe identification, et affichage debut
 def identification():
     identifiant= input("Entrez votre login : ")
-    liste = crud.read_user(identifiant)
-    print(liste)    
+    liste = crud.read_user(identifiant)  
     mot_de_passe=input("Entrez votre mot_de_passe : ")
     h = hashlib.new('sha256')
     h.update(mot_de_passe.encode())
@@ -20,7 +17,7 @@ def identification():
     if(liste != []):
         if(liste[0][1]==identifiant and liste[0][2]==mot_de_passe):
             print("Bienvenue dans Maoka , "+identifiant+" !")
-            return true
+            return True
         elif(liste[0][2]!=mot_de_passe):
             print("Votre mot de passe n'est pas correct.Essayez encore une fois.")
     else:
@@ -58,24 +55,24 @@ def ecrire_la_suite():
 
 
 
-
+creation_de_compte()
 personne_connecte=identification()
 paragraphe_en_cours=1
 chapitre_choisi=1
-nouvelle_histoire=true
+nouvelle_histoire=True
 while(personne_connecte):
     afficher_histoire()
 
     commande_utilisateur=input("Entrez votre commande : \n (1:Lire Histoire |2: Contester le dernier message | 3:Ecrire la suite | 4 : Se Déconnecter :")
     if(commande_utilisateur=="1"):
-        lit_histoire=true
-        nouvelle_histoire=true
+        lit_histoire=True
+        nouvelle_histoire=True
         while(nouvelle_histoire):
             liste_retourne=lire_histoire(chapitre_choisi)       
             print(liste_retourne)            
             i=0
             j=i+3        
-            lit_histoire= true
+            lit_histoire= True
             if len(liste_retourne)>j:
                 for _ in liste_retourne[i:j]:
                     print(_)
@@ -122,12 +119,12 @@ while(personne_connecte):
                     nombre_total_chapitre=str(crud.nombre_de_chapitre())
                     print("Il y a "+nombre_total_chapitre)
                     chapitre_choisi=int(input("Entrez le numéro du chapitre que vous voulez voir : "))
-                    lit_histoire =false
-                    nouvelle_histoire=true
+                    lit_histoire =False
+                    nouvelle_histoire=False
                 
                 if sous_commande_utilisateur == "R":
-                    lit_histoire=false
-                    nouvelle_histoire=false
+                    lit_histoire=False
+                    nouvelle_histoire=False
                 
                 if sous_commande_utilisateur == "K":
                     nombre_total_chapitre=str(crud.nombre_de_chapitre())
