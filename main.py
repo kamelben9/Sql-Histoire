@@ -1,10 +1,12 @@
+from re import I
 
 import crud
 import sqlite3
 import hashlib
 import time
-import fonction
 from fonction import creation_de_compte
+import fonction
+
 
 
 #Motde passe identification, et affichage debut
@@ -54,6 +56,8 @@ def lire_histoire(ChapterID):
 def ecrire_la_suite():
     liste_caractere=crud.read_chapter_charactere()
     return liste_caractere    
+
+
 
 creation_de_compte()
 liste_personne_connecte =[]
