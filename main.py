@@ -11,7 +11,6 @@ from fonction import creation_de_compte
 def identification():
     identifiant= input("Entrez votre login : ")
     liste = crud.read_user(identifiant)
-    print(liste)    
     mot_de_passe=input("Entrez votre mot_de_passe : ")
     h = hashlib.new('sha256')
     h.update(mot_de_passe.encode())
