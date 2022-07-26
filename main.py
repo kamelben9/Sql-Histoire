@@ -4,6 +4,7 @@ import sqlite3
 import hashlib
 import time
 import fonction
+from fonction import creation_de_compte
 
 
 #Motde passe identification, et affichage debut
@@ -55,6 +56,7 @@ def ecrire_la_suite():
     liste_caractere=crud.read_chapter_charactere()
     return liste_caractere    
 
+creation_de_compte()
 liste_personne_connecte =[]
 liste_nom_personne_connecte =[]
 liste_identification =identification()
